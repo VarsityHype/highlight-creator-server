@@ -4,7 +4,12 @@ const cors = require('cors')
 const models = require('./models')
 const PORT = 3000
 const app = express()
-global.bcrypt = require('bcrypt')
+
+// user route
+const userRouter = require('./routes/user')
+app.use('/user', userRouter)
+
+
 
 dotenv.config()
 app.use(cors())
