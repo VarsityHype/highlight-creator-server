@@ -5,11 +5,9 @@ const models = require('./models')
 const PORT = 3000
 const app = express()
 
-// user route
-const userRouter = require('./routes/user')
-app.use('/user', userRouter)
-
-
+// video route
+const videoRouter = require('./routes/video')
+app.use('/video', videoRouter)
 
 dotenv.config()
 app.use(cors())
