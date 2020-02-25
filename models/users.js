@@ -5,8 +5,21 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING
   }, {});
+  
   Users.associate = function(models) {
-    // associations can be defined here
+    Users.hasMany(models.Playlists, {
+      as: 'Playlists',
+      foreign_key: 'owner_id'
+    })
+    Users.hasMany(models.Videos, {
+      as: 'Videos',
+      foreign_key: 'uploader_id'
+    })
+    Users.hasMany(models.Clips, {
+      as: 'Clips',
+      foreign_key: 'creator_id'
+    })
   };
+  
   return Users;
 };

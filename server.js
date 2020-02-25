@@ -4,7 +4,10 @@ const cors = require('cors')
 const models = require('./models')
 const PORT = 3000
 const app = express()
-global.bcrypt = require('bcrypt')
+
+// video route
+const videoRouter = require('./routes/video')
+app.use('/video', videoRouter)
 
 dotenv.config()
 app.use(cors())
