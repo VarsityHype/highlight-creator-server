@@ -1,9 +1,11 @@
-{
+require('dotenv').config()
+
+module.exports = {
   "development": {
-    "username": "varsityhypeadmin@varsityhype",
-    "password": "vHYPE2020!",
-    "database": "postgres",
-    "host": "varsityhype.postgres.database.azure.com",
+    "username": process.env.DB_USERNAME,
+    "password": process.env.DB_PASSWORD,
+    "database": process.env.DB_NAME,
+    "host": process.env.DB_HOST,
     "port": 5432,
     "ssl": true,
     "dialect": "postgres",
@@ -27,3 +29,4 @@
     "operatorsAliases": false
   }
 }
+

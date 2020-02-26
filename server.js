@@ -1,7 +1,7 @@
 const express = require('express')
-const dotenv = require('dotenv')
 const cors = require('cors')
 const models = require('./models')
+require('dotenv').config()
 const PORT = 3000
 const app = express()
 
@@ -9,7 +9,6 @@ const app = express()
 const videoRouter = require('./routes/video')
 app.use('/video', videoRouter)
 
-dotenv.config()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
