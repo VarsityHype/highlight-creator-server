@@ -9,15 +9,23 @@ module.exports = (sequelize, DataTypes) => {
   Users.associate = function(models) {
     Users.hasMany(models.Playlists, {
       as: 'Playlists',
-      foreign_key: 'owner_id'
+      foreignKey: 'owner_id'
     })
     Users.hasMany(models.Videos, {
       as: 'Videos',
-      foreign_key: 'uploader_id'
+      foreignKey: 'uploader_id'
     })
     Users.hasMany(models.Clips, {
       as: 'Clips',
-      foreign_key: 'creator_id'
+      foreignKey: 'creator_id'
+    })
+    Users.hasMany(models.comments, {
+      as: 'comments',
+      foreignKey: 'commenter_id'
+    })
+    Users.hasMany(models.reactions, {
+      as: 'reactions',
+      foreignKey: 'reactor_id'
     })
   };
   
