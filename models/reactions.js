@@ -7,14 +7,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   reactions.associate = function(models) {
 
-    reactions.belongsTo(models.Users, {
-      as: 'Users',
-      foreign_key: 'user_id'
+    models.reactions.belongsTo(models.users, {
+      as: 'users',
+      foreignKey: 'user_id'
     })
 
-    reactions.belongsTo(models.Videos), {
+    models.reactions.belongsTo(models.Videos), {
       as: 'Videos',
-      foreign_key: 'video_id'
+      foreignKey: 'video_id'
     })
   };
   return reactions;
