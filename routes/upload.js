@@ -2,6 +2,8 @@ if (process.env.NODE_ENV !== 'production') {
     //require('dotenv').load();
 }
 
+const models = require('../models')
+
 const
     express = require('express')
     , router = express.Router()
@@ -44,15 +46,33 @@ router.post('/', uploadStrategy, (req, res) => {
         if(err) {
             handleError(err);
             return;
-        }
+        } else {
+
 
         res.json({
             success: true,
             uploaded_url: `https://astorageserver.blob.core.windows.net/video-storagea/${blobName}`,
-            uploader_id: 5
         })
-        
+    }
     });
 });
+
+router.post('/uploaded', (req,res) => {
+    const azure_url = req.body.azure_url
+    const uploader_id = req.body.uploader_id
+
+    let Video = models.Videos.build({
+        azure_url: azure_url,
+        uploader_id: uploader_id,
+        title: 'hi',
+        description:'hello,description!'
+    })
+
+    Video.save().then((persistedVideo) => {
+        console.log(persistedVideo)
+    })
+
+})
+
 
 module.exports = router;
