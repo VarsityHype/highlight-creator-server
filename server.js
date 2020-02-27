@@ -5,16 +5,17 @@ require('dotenv').config()
 const PORT = 3001
 const app = express()
 
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
+
+
 // video route
 const videoRouter = require('./routes/video')
 app.use('/video', videoRouter)
 
 const uploadRouter = require('./routes/upload')
 app.use('/upload', uploadRouter)
-
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({extended: false}))
 
 app.get('/', (req, res) => {
     res.json('/')
