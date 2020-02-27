@@ -9,6 +9,9 @@ const app = express()
 const videoRouter = require('./routes/video')
 app.use('/video', videoRouter)
 
+const uploadRouter = require('./routes/upload')
+app.use('/upload', uploadRouter)
+
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
