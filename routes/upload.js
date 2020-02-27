@@ -3,8 +3,11 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const
-      express = require('express')
+    express = require('express')
     , router = express.Router()
+
+    cors = require('cors')
+    , router.use(cors())
 
     , multer = require('multer')
     , inMemoryStorage = multer.memoryStorage()
@@ -29,8 +32,9 @@ const getBlobName = originalName => {
 
 router.post('/', uploadStrategy, (req, res) => {
 
+    console.log("file uploaded")
     const
-          blobName = getBlobName(req.file.originalname)
+        blobName = getBlobName(req.file.originalname)
         , stream = getStream(req.file.buffer)
         , streamLength = req.file.buffer.length
     ;
