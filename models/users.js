@@ -19,14 +19,6 @@ module.exports = (sequelize, DataTypes) => {
       as: 'Clips',
       foreignKey: 'creator_id'
     })
-    Users.hasMany(models.comments, {
-      as: 'comments',
-      foreignKey: 'commenter_id'
-    })
-    Users.hasMany(models.reactions, {
-      as: 'reactions',
-      foreignKey: 'reactor_id'
-    })
   };
   
   return Users;
