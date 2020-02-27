@@ -1,7 +1,10 @@
+//598430
+
 const express = require('express')
 const router = express.Router()
 const cors = require('cors')
 const models = require('../models')
+const IncomingForm = require('formidable').IncomingForm
 
 router.use(express.urlencoded({extended: false}))
 router.use(express.json())
@@ -11,18 +14,58 @@ router.use(cors())
 
 router.post('/upload', (req, res) => {
 
-    console.log(req.body.title)
-
-    let video = models.Videos.build({
-        title: req.body.title,
-        description: req.body.description,
-        azure_url: req.body.azure_url,
-        uploader_id: req.body.uploader_id
-    })
-    let savedVideo = video.save()
-    if (savedVideo !== null) {
-        res.send('Video saved!')
+    if (process.env.NODE_ENV !== 'production') {
+        //require('dotenv').load();
     }
+    
+    const
+          express = require('express')
+        , router = express.Router()
+    
+        , multer = require('multer')
+        , inMemoryStorage = multer.memoryStorage()
+        , uploadStrategy = multer({ storage: inMemoryStorage }).single('image')
+    
+        , azureStorage = require('azure-storage')
+        , blobService = azureStorage.createBlobService()
+    
+        , getStream = require('into-stream')
+        , containerName = 'video-storagea'
+    ;
+    
+    const handleError = (err, res) => {
+        res.status(500);
+        res.render('error', { error: err });
+    };
+    
+    const getBlobName = originalName => {
+        const identifier = Math.random().toString().replace(/0\./, ''); // remove "0." from start of string
+        return `${identifier}-${originalName}`;
+    };
+    
+    router.post('/', uploadStrategy, (req, res) => {
+    
+        const
+              blobName = getBlobName(req.file.originalname)
+            , stream = getStream(req.file.buffer)
+            , streamLength = req.file.buffer.length
+        ;
+    
+        blobService.createBlockBlobFromStream(containerName, blobName, stream, streamLength, err => {
+    
+            if(err) {
+                handleError(err);
+                return;
+            }
+    
+            res.json({
+                success: true,
+                uploaded_url: `https://astorageserver.blob.core.windows.net/video-storagea/${blobName}`,
+                uploader_id: 5
+            })
+            
+        });
+    });
 
 })
 
