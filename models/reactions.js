@@ -12,10 +12,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'user_id'
     })
 
-    models.reactions.belongsTo(models.Videos), {
+    models.reactions.belongsTo(models.Videos, {
       as: 'Videos',
       foreignKey: 'video_id'
     })
+
   };
   return reactions;
 };
