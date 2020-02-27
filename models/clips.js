@@ -11,16 +11,16 @@ module.exports = (sequelize, DataTypes) => {
     Clips.belongsToMany(models.Playlists, {
       through: 'Playlist_Clips',
       as: 'playlists',
-      foreign_key: 'clip_id',
-      other_key: 'playlist_id'
+      foreignKey: 'clip_id',
+      otherKey: 'playlist_id'
     })
     Clips.belongsTo(models.Videos, {
       as: 'Videos',
-      foreign_key: 'id'
+      foreignKey: 'video_id'
     })
     Clips.belongsTo(models.Users, {
       as: 'Users',
-      foreign_key: 'id'
+      foreignKey: 'user_id'
     })
   };
 
