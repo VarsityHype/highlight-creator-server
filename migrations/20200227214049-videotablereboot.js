@@ -9,9 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       uploader_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       azure_url: {
+        type: Sequelize.STRING
+      },
+      title: {
+        type: Sequelize.STRING
+      },
+      description: {
         type: Sequelize.STRING
       },
       createdAt: {
