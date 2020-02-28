@@ -42,6 +42,8 @@ router.post('/upload', (req, res) => {
         const identifier = Math.random().toString().replace(/0\./, ''); // remove "0." from start of string
         return `${identifier}-${originalName}`;
     };
+
+    router.get('/:videoId', )
     
     router.post('/', uploadStrategy, (req, res) => {
     
@@ -61,7 +63,6 @@ router.post('/upload', (req, res) => {
             res.json({
                 success: true,
                 uploaded_url: `https://astorageserver.blob.core.windows.net/video-storagea/${blobName}`,
-                uploader_id: 5
             })
             
         });
