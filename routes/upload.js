@@ -60,12 +60,14 @@ router.post('/', uploadStrategy, (req, res) => {
 router.post('/uploaded', (req,res) => {
     const azure_url = req.body.azure_url
     const uploader_id = req.body.uploader_id
+    const title = req.body.title
+    const description = req.body.description
 
     let Video = models.Videos.build({
         azure_url: azure_url,
         uploader_id: uploader_id,
-        title: 'hi',
-        description:'hello,description!'
+        title: title,
+        description: description
     })
 
     Video.save().then((persistedVideo) => {
