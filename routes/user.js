@@ -9,7 +9,9 @@ router.post('/finish-profile', (req, res) => {
         lastName: req.body.lastName
     }
 
-    models.Users.findOne({where: { auth0id: 'abc' }})
+    let auth0id = 'abc'
+
+    let user = models.Users.findOne({where: { auth0id: auth0id }})
 })
 
 

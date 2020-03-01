@@ -12,6 +12,9 @@ app.use(express.urlencoded({extended: false}))
 const uploadRouter = require('./routes/upload')
 app.use('/upload', uploadRouter)
 
+const videoRouter = require('./routes/video')
+app.use('/video', videoRouter)
+
 app.get('/', (req, res) => {
     res.json('/')
 })
