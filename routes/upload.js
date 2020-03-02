@@ -27,19 +27,19 @@ const handleError = (err, res) => {
     res.render('error', { error: err });
 };
 
-const getBlobName = originalName => {
+const getBlobName = originalname => {
     const identifier = Math.random().toString().replace(/0\./, ''); // remove "0." from start of string
-    return `${identifier}-${originalName}`;
+    return `${identifier}-${originalname}`;
 };
 
 router.post('/', uploadStrategy, (req, res) => {
-
-    console.log("file uploaded")
+    console.log(req.file.originalname)
     const
         blobName = getBlobName(req.file.originalname)
         , stream = getStream(req.file.buffer)
         , streamLength = req.file.buffer.length
     ;
+    console.log(req.file.originalname)
 
     blobService.createBlockBlobFromStream(containerName, blobName, stream, streamLength, err => {
 
@@ -71,7 +71,7 @@ router.post('/uploaded', (req,res) => {
     })
 
     Video.save().then((persistedVideo) => {
-        console.log(persistedVideo)
+        console.log("persistedVideo")
     })
 
 })
