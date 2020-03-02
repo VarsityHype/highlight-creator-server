@@ -21,6 +21,16 @@ app.get('/', (req, res) => {
     res.json('/')
 })
 
+app.post('/exportClips', (req, res) => {
+    let clipsList = req.body.clipsList
+    let sourceVideo = req.body.sourceVideo
+
+    clipsList.forEach(clip => {
+        console.log("Start Time")
+        console.log("End Time")
+    })
+})
+
 app.listen(PORT, () => {
     console.log('Server running on port ' + PORT)
 })
