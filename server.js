@@ -19,6 +19,9 @@ app.get('/', (req, res) => {
     res.json('/')
 })
 
+const clipsRouter = require('./routes/clips')
+app.use('/clips', clipsRouter)
+
 app.listen(PORT, () => {
     console.log('Server running on port ' + PORT)
 })

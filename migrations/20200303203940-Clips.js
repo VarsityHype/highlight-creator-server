@@ -9,15 +9,18 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       source_video_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       creator_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       start_timestamp: {
         type: Sequelize.STRING
       },
       end_timestamp: {
+        type: Sequelize.STRING
+      },
+      title: {
         type: Sequelize.STRING
       },
       createdAt: {

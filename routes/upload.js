@@ -33,18 +33,17 @@ const getBlobName = originalname => {
 };
 
 router.post('/', uploadStrategy, (req, res) => {
-    console.log(req.file.originalname)
     const
         blobName = getBlobName(req.file.originalname)
         , stream = getStream(req.file.buffer)
         , streamLength = req.file.buffer.length
     ;
-    console.log(req.file.originalname)
 
     blobService.createBlockBlobFromStream(containerName, blobName, stream, streamLength, err => {
 
         if(err) {
-            handleError(err);
+            handleError(err)
+            console.log("error");
             return;
         } else {
 
