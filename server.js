@@ -13,25 +13,6 @@ var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
 
 
-const jwtCheck = jwt({
-      secret: jwks.expressJwtSecret({
-          cache: true,
-          rateLimit: true,
-          jwksRequestsPerMinute: 5,
-          jwksUri: 'https://dev-d7sbfn4b.auth0.com/.well-known/jwks.json'
-    }),
-    audience: '',
-    issuer: 'https://dev-d7sbfn4b.auth0.com/',
-    algorithms: ['RS256']
-});
-
-app.use(jwtCheck);
-
-app.get("/api/external", jwtCheck, (req, res) => {
-    res.send({
-      msg: "Your Access Token was successfully validated!"
-    });
-  })
 
 
 app.get('/authorized', function (req, res) {
