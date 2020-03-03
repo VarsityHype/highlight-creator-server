@@ -21,13 +21,15 @@ app.get('/', (req, res) => {
     res.json('/')
 })
 
-app.post('/exportClips', (req, res) => {
+app.post('/saveClip', (req, res) => {
     let clipsList = req.body.clipsList
-    let sourceVideo = req.body.sourceVideo
 
     clipsList.forEach(clip => {
-        console.log("Start Time")
-        console.log("End Time")
+        console.log(clip.start, clip.end)
+        models.Clips.create({
+            start_timestamp: clip.start,
+            end_timestamp: clip.end
+        })
     })
 })
 
