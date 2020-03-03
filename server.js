@@ -30,6 +30,9 @@ app.get('/', (req, res) => {
     res.json('/')
 })
 
+const clipsRouter = require('./routes/clips')
+app.use('/clips', clipsRouter)
+
 var request = require("request");
 
 app.listen(PORT, () => {

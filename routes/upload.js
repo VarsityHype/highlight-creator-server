@@ -60,12 +60,12 @@ router.post('/', uploadStrategy, (req, res) => {
         , stream = getStream(req.file.buffer)
         , streamLength = req.file.buffer.length
     ;
-    console.log(req.file.originalname)
 
     blobService.createBlockBlobFromStream(containerName, blobName, stream, streamLength, err => {
 
         if(err) {
-            handleError(err);
+            handleError(err)
+            console.log("error");
             return;
         } else {
 
