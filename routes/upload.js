@@ -53,11 +53,8 @@ const getBlobName = originalname => {
 
     console.log("file uploaded")
 router.post('/', uploadStrategy, (req, res) => {
-<<<<<<< HEAD
-=======
     console.log(req.file.originalname)
   
->>>>>>> a2ef411fe4b85ef32ae0a0e4b485af8d9be32e81
     const
         blobName = getBlobName(req.file.originalname)
         , stream = getStream(req.file.buffer)

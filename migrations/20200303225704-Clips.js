@@ -15,10 +15,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       start_timestamp: {
-        type: Sequelize.STRING
+        type: Sequelize.FLOAT
       },
       end_timestamp: {
-        type: Sequelize.STRING
+        type: Sequelize.FLOAT
       },
       title: {
         type: Sequelize.STRING

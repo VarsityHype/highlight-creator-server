@@ -15,17 +15,18 @@ router.get('/:id', (req, res) => {
 router.post('/store_clip/', (req, res) => {
 
     let title = req.body.title
-    let start = req.body.start
-    let end = req.body.end
+    let start = req.body.start_timestamp
+    let end = req.body.end_timestamp
     let azure_url = req.body.azure_url
     console.log(title + ' ' + start + ' ' + end + ' ' + azure_url)
+    console.log(req.body)
 
     let clip = models.Clips.build({
-        title: title,
         start_timestamp: start,
         end_timestamp: end,
+        title: req.body.clip_title,
         source_video_id: azure_url,
-        creator_id: '1'
+        creator_id: req.body.creator_id
     })
     clip.save().then(clip => res.json(clip))
 })
