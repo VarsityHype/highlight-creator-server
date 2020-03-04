@@ -14,13 +14,14 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/create-playlist', (req, res) => {
+
     let playlist = models.Playlists.build({
-        title: title,
-        description: description,
+        title: req.body.newPlaylist.title,
+        description: req.body.newPlaylist.description,
         owner_id: req.headers.request_user_id        
     })
     
-    playlist.save().then(res => res.json(playlist))
+    playlist.save()
 
 })
 
