@@ -22,23 +22,6 @@ const
     , containerName = 'video-storagea'
 ;
 
-var jwt = require('express-jwt');
-var jwks = require('jwks-rsa');
-
-
-const jwtCheck = jwt({
-      secret: jwks.expressJwtSecret({
-          cache: true,
-          rateLimit: true,
-          jwksRequestsPerMinute: 5,
-          jwksUri: 'https://dev-d7sbfn4b.auth0.com/.well-known/jwks.json'
-    }),
-    audience: '',
-    issuer: 'https://dev-d7sbfn4b.auth0.com/',
-    algorithms: ['RS256']
-});
-
-router.use(jwtCheck);
 
 const handleError = (err, res) => {
     res.status(500);
@@ -80,13 +63,13 @@ router.post('/', uploadStrategy, (req, res) => {
 
 router.post('/uploaded', jwtCheck, (req,res) => {
     const azure_url = req.body.azure_url
-    const uploader_id = req.body.uploader_id
+    const uploader_id = req.headers.request_user_id
 
     let Video = models.Videos.build({
         azure_url: azure_url,
         uploader_id: uploader_id,
-        title: 'hi',
-        description:'hello,description!'
+        title: req.body.title,
+        description: req.body.description
     })
 
     Video.save().then((persistedVideo) => {
