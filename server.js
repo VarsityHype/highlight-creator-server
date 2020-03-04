@@ -30,7 +30,7 @@ app.post('/saveClip', (req, res) => {
     let sourceVideo = req.body.sourceVideo
     let clipsList = req.body.clipsList
     let creatorId = req.headers.request_user_id
-    console.log(req.headers)
+    console.log(req.headers.request_user_id)
     clipsList.forEach(clip => {
         models.Clips.create({
             source_video_id: sourceVideo,
