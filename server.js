@@ -12,13 +12,9 @@ app.use(express.urlencoded({extended: false}))
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
 
-
-
-
 app.get('/authorized', function (req, res) {
     res.send('Secured Resource');
 });
-
 
 const uploadRouter = require('./routes/upload')
 app.use('/upload', uploadRouter)
@@ -30,10 +26,17 @@ app.get('/', (req, res) => {
     res.json('/')
 })
 
-const clipsRouter = require('./routes/clips')
-app.use('/clips', clipsRouter)
+app.post('/saveClip', (req, res) => {
+    let clipsList = req.body.clipsList
 
-var request = require("request");
+    clipsList.forEach(clip => {
+        console.log(clip.start, clip.end)
+        models.Clips.create({
+            start_timestamp: clip.start,
+            end_timestamp: clip.end
+        })
+    })
+})
 
 app.listen(PORT, () => {
     console.log('Server running on port ' + PORT)
