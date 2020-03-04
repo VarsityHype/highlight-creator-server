@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     })
     Videos.belongsTo(models.Users, {
       as: 'Users',
-      foreignKey: 'user_id'
+      foreignKey: 'uploader_id'
     })
   };
   return Videos;

@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     source_video_id: DataTypes.STRING,
     creator_id: DataTypes.STRING,
     start_timestamp: DataTypes.STRING,
-    end_timestamp: DataTypes.STRING
+    end_timestamp: DataTypes.STRING,
+    title: DataTypes.STRING
   }, {});
 
   Clips.associate = function(models) {

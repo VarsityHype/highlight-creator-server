@@ -9,13 +9,18 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
+var jwt = require('express-jwt');
+var jwks = require('jwks-rsa');
 
-// video route
-const videoRouter = require('./routes/video')
-app.use('/video', videoRouter)
+app.get('/authorized', function (req, res) {
+    res.send('Secured Resource');
+});
 
 const uploadRouter = require('./routes/upload')
 app.use('/upload', uploadRouter)
+
+const videoRouter = require('./routes/video')
+app.use('/video', videoRouter)
 
 app.get('/', (req, res) => {
     res.json('/')

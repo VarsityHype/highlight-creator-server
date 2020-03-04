@@ -22,19 +22,39 @@ const
     , containerName = 'video-storagea'
 ;
 
+var jwt = require('express-jwt');
+var jwks = require('jwks-rsa');
+
+
+const jwtCheck = jwt({
+      secret: jwks.expressJwtSecret({
+          cache: true,
+          rateLimit: true,
+          jwksRequestsPerMinute: 5,
+          jwksUri: 'https://dev-d7sbfn4b.auth0.com/.well-known/jwks.json'
+    }),
+    audience: '',
+    issuer: 'https://dev-d7sbfn4b.auth0.com/',
+    algorithms: ['RS256']
+});
+
+router.use(jwtCheck);
+
 const handleError = (err, res) => {
     res.status(500);
     res.render('error', { error: err });
 };
 
-const getBlobName = originalName => {
+const getBlobName = originalname => {
     const identifier = Math.random().toString().replace(/0\./, ''); // remove "0." from start of string
-    return `${identifier}-${originalName}`;
+    return `${identifier}-${originalname}`;
 };
 
-router.post('/', uploadStrategy, (req, res) => {
 
     console.log("file uploaded")
+router.post('/', uploadStrategy, (req, res) => {
+    console.log(req.file.originalname)
+  
     const
         blobName = getBlobName(req.file.originalname)
         , stream = getStream(req.file.buffer)
@@ -44,7 +64,8 @@ router.post('/', uploadStrategy, (req, res) => {
     blobService.createBlockBlobFromStream(containerName, blobName, stream, streamLength, err => {
 
         if(err) {
-            handleError(err);
+            handleError(err)
+            console.log("error");
             return;
         } else {
 
@@ -57,7 +78,7 @@ router.post('/', uploadStrategy, (req, res) => {
     });
 });
 
-router.post('/uploaded', (req,res) => {
+router.post('/uploaded', jwtCheck, (req,res) => {
     const azure_url = req.body.azure_url
     const uploader_id = req.body.uploader_id
 
@@ -69,7 +90,7 @@ router.post('/uploaded', (req,res) => {
     })
 
     Video.save().then((persistedVideo) => {
-        console.log(persistedVideo)
+        console.log("persistedVideo")
     })
 
 })
