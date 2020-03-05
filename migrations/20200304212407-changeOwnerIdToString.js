@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       owner_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       title: {
         type: Sequelize.STRING

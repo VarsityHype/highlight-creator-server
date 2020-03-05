@@ -41,6 +41,9 @@ app.use('/upload', jwtCheck,  uploadRouter)
 const videoRouter = require('./routes/video')
 app.use('/video', jwtCheck, videoRouter)
 
+const playlistsRouter = require('./routes/playlist')
+app.use('/playlists', jwtCheck, playlistsRouter)
+
 app.get('/', (req, res) => {
     res.json('/')
 })
