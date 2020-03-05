@@ -27,7 +27,11 @@ router.post('/create-playlist', (req, res) => {
 })
 
 router.post('/add-to-playlist', (req, res) => {
-
+ let playlist = models.playlistrelation.build({
+     playlist_reference_id: req.body.playlist_id,
+     source_id: req.body.source_video_id,
+     isClip: req.body.isClip
+ })
 })
 
 router.get('/get-playlists', (req, res) => {
