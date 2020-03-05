@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     comment_id: DataTypes.INTEGER
   }, {});
   comments.associate = function(models) {
-    comments.belongsTo(models.Users, {
+    comments.belongsTo(models.users, {
       as: 'users',
       foreignKey: 'user_id'
     })

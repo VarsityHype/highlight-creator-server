@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'playlist_id',
       otherKey: 'clip_id'
     })
-    Playlists.belongsTo(models.Users, {
-      as: 'Users',
+    Playlists.belongsTo(models.users, {
+      as: 'users',
       foreignKey: 'owner_id'
     })
   };
