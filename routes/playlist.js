@@ -3,7 +3,7 @@ const router = express.Router()
 const cors = require('cors')
 const models = require('../models')
 
-
+/*
 // http://localhost:3001/playlist/<clip ID>
 router.get('/:id', (req, res) => {
     id = req.params.id
@@ -12,6 +12,7 @@ router.get('/:id', (req, res) => {
         res.json(clip)
         )
 })
+*/
 
 router.post('/create-playlist', (req, res) => {
 
@@ -27,6 +28,11 @@ router.post('/create-playlist', (req, res) => {
 
 router.post('/add-to-playlist', (req, res) => {
 
+})
+
+router.get('/get-playlists', (req, res) => {
+    models.Playlists.findAll()
+    .then(playlists => res.json(playlists))
 })
 
 
