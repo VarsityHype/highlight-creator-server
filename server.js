@@ -36,7 +36,7 @@ const authRouter = require('./routes/auth')
 app.use('/auth', jwtCheck, authRouter)
 
 const uploadRouter = require('./routes/upload')
-app.use('/upload', jwtCheck,  uploadRouter)
+app.use('/upload', uploadRouter)
 
 const videoRouter = require('./routes/video')
 app.use('/video', jwtCheck, videoRouter)

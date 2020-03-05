@@ -16,8 +16,8 @@ router.post('/finish-profile', (req, res) => {
 
 // http://localhost:3001/user/<USER_ID>/my_videos
 // TODO change user ID from a param to the session variable.
-router.get('/:id/my_videos', (req, res) => {
-    let id = req.params.id
+router.get('/', (req, res) => {
+    let id = req.headers.request_user_id
     models.Videos.findAll({ where: {uploader_id: id} })
     .then(
         videos => {
