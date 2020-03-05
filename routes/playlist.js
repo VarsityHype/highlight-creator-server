@@ -31,7 +31,7 @@ router.post('/add-to-playlist', (req, res) => {
 })
 
 router.get('/get-playlists', (req, res) => {
-    models.Playlists.findAll()
+    models.Playlists.findAll({where: {owner_id: req.headers.request_user_id}})
     .then(playlists => res.json(playlists))
 })
 
