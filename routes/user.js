@@ -11,7 +11,7 @@ router.post('/finish-profile', (req, res) => {
 
     let auth0id = 'abc'
 
-    let user = models.Users.findOne({where: { auth0id: auth0id }})
+    let user = models.users.findOne({where: { auth0id: auth0id }})
 })
 
 // http://localhost:3001/user/<USER_ID>/my_videos

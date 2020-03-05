@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   reactions.associate = function(models) {
 
-    models.reactions.belongsTo(models.Users, {
+    models.reactions.belongsTo(models.users, {
       as: 'users',
       foreignKey: 'user_id'
     })

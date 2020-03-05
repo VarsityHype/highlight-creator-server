@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
       as: 'reactions',
       foreignKey: 'video_id'
     })
-    Videos.belongsTo(models.Users, {
-      as: 'Users',
+    Videos.belongsTo(models.users, {
+      as: 'users',
       foreignKey: 'uploader_id'
     })
   };

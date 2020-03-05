@@ -19,8 +19,8 @@ module.exports = (sequelize, DataTypes) => {
       as: 'Videos',
       foreignKey: 'video_id'
     })
-    Clips.belongsTo(models.Users, {
-      as: 'Users',
+    Clips.belongsTo(models.users, {
+      as: 'users',
       foreignKey: 'user_id'
     })
   };
