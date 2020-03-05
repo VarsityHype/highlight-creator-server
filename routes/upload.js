@@ -36,7 +36,7 @@ const getBlobName = originalname => {
 
     console.log("file uploaded")
 router.post('/', uploadStrategy, (req, res) => {
-    console.log(req.file.originalname)
+    //console.log(req.file.originalname)
   
     const
         blobName = getBlobName(req.file.originalname)
@@ -61,9 +61,10 @@ router.post('/', uploadStrategy, (req, res) => {
     });
 });
 
-router.post('/uploaded', jwtCheck, (req,res) => {
+router.post('/uploaded', (req,res) => {
     const azure_url = req.body.azure_url
     const uploader_id = req.headers.request_user_id
+    console.log(req.body)
 
     let Video = models.Videos.build({
         azure_url: azure_url,
