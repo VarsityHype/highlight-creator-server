@@ -9,10 +9,8 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
-
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
-
 
 global.jwtCheck = jwt({
       secret: jwks.expressJwtSecret({
@@ -26,11 +24,13 @@ global.jwtCheck = jwt({
     algorithms: ['RS256']
 });
 
-
-
 app.get('/authorized', function (req, res) {
     res.send('Secured Resource');
 });
+
+/*====================ROUTES====================*/
+const clipsRouter = require('./routes/clips')
+app.use('/clips', jwtCheck, clipsRouter)
 
 const authRouter = require('./routes/auth')
 app.use('/auth', jwtCheck, authRouter)
@@ -48,22 +48,7 @@ app.get('/', (req, res) => {
     res.json('/')
 })
 
-app.post('/saveClip', (req, res) => {
-    let sourceVideo = req.body.sourceVideo
-    let clipsList = req.body.clipsList
-    let creatorId = req.headers.request_user_id
-    console.log(req.headers.request_user_id)
-    clipsList.forEach(clip => {
-        models.Clips.create({
-            source_video_id: sourceVideo,
-            title: clip.title,
-            creator_id: creatorId,
-            start_timestamp: clip.start,
-            end_timestamp: clip.end
-        })
-    })
-})
-
+/*====================PORT====================*/
 app.listen(PORT, () => {
     console.log('Server running on port ' + PORT)
 })

@@ -22,7 +22,6 @@ const
     , containerName = 'video-storagea'
 ;
 
-
 const handleError = (err, res) => {
     res.status(500);
     res.render('error', { error: err });
@@ -33,10 +32,7 @@ const getBlobName = originalname => {
     return `${identifier}-${originalname}`;
 };
 
-
-    console.log("file uploaded")
 router.post('/', uploadStrategy, (req, res) => {
-    //console.log(req.file.originalname)
   
     const
         blobName = getBlobName(req.file.originalname)
@@ -52,7 +48,6 @@ router.post('/', uploadStrategy, (req, res) => {
             return;
         } else {
 
-
         res.json({
             success: true,
             uploaded_url: `https://astorageserver.blob.core.windows.net/video-storagea/${blobName}`,
@@ -64,7 +59,6 @@ router.post('/', uploadStrategy, (req, res) => {
 router.post('/uploaded', (req,res) => {
     const azure_url = req.body.azure_url
     const uploader_id = req.headers.request_user_id
-    console.log(req.body)
 
     let Video = models.Videos.build({
         azure_url: azure_url,
@@ -73,11 +67,7 @@ router.post('/uploaded', (req,res) => {
         description: req.body.description
     })
 
-    Video.save().then((persistedVideo) => {
-        console.log("persistedVideo")
-    })
-
+    Video.save()
 })
-
 
 module.exports = router;
