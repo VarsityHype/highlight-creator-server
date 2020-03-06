@@ -24,6 +24,12 @@ router.get('/', (req, res) => {
     )
 })
 
+// delete a video from the db
+router.post('/delete-video', (req, res) => {
+    let azure_url = req.body.azure_url
+    models.Videos.destroy({where: {azure_url: azure_url}})
+})
+
 module.exports = router
 
 
