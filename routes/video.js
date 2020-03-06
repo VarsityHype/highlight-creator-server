@@ -3,14 +3,6 @@ const router = express.Router()
 const cors = require('cors')
 const models = require('../models')
 
-/*
-// http://localhost:3001/video/
-router.get('/', (req, res) => {
-    models.Videos.findAll()
-    .then(videos => res.json(videos))
-})
-*/
-
 // http://localhost:3001/video/<VIDEO ID>
 router.get('/:id', (req, res) => {
     let id = req.params.id
