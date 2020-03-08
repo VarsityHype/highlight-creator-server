@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const cors = require('cors')
 const models = require('../models')
 
 // http://localhost:3001/video/<VIDEO ID>

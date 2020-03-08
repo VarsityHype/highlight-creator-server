@@ -1,24 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const cors = require('cors')
 const models = require('../models')
-
-
-// http://localhost:3001/clips/<clip ID>
-router.get('/:id', (req, res) => {
-    id = req.params.id
-    models.clips.findOne({where: { id: id }})
-    .then(clip => 
-        res.json(clip)
-        )
-})
 
 // store a clip
 router.post('/store_clip/', (req, res) => {
     let sourceVideo = req.body.sourceVideo
     let clipsList = req.body.clipsList
     let creatorId = req.headers.request_user_id
-    console.log(req.headers.request_user_id)
     clipsList.forEach(clip => {
         models.Clips.create({
             source_video_id: sourceVideo,
@@ -30,6 +18,18 @@ router.post('/store_clip/', (req, res) => {
     })
 })
 
+// view your clips
+router.get('/view-clips/', (req, res) => {
+    let creator_id = req.headers.request_user_id
+    models.Clips.findAll({where: {creator_id: creator_id}})
+    .then(clips => res.json(clips))
+})
+
+// delete a clip
+router.post('/delete-clip', (req, res) => {
+    let id = req.body.clipId
+    models.Clips.destroy({where: {id: id}})
+})
 
 module.exports = router
 
