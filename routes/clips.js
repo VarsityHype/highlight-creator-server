@@ -9,7 +9,7 @@ router.post('/store_clip/', (req, res) => {
     let creatorId = req.headers.request_user_id
     clipsList.forEach(clip => {
         models.Clips.create({
-            source_video_id: sourceVideo,
+            source_video_id: `${sourceVideo}#t=${clip.start},${clip.end}`,
             title: clip.title,
             creator_id: creatorId,
             start_timestamp: clip.start,
