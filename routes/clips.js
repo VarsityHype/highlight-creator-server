@@ -27,7 +27,7 @@ router.get('/view-clips/', (req, res) => {
 
 // delete a clip
 router.post('/delete-clip', (req, res) => {
-    let id = req.body.clipId
+    let id = req.body.id
     models.Clips.destroy({where: {id: id}})
 })
 
